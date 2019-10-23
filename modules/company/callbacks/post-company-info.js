@@ -8,21 +8,21 @@ module.exports = function(req,res) {
     companyTitle: req.body.companyTitle,
     contact: {
       eposta: req.body.eposta,
-      phone : req.body.phone || "",
+      phone : req.body.phone,
       address: {
         city: req.body.city,
         district: req.body.district,
         details: req.body.addressDetails
       }
     },
-    companyDescription: req.body.companyDesc
+    companyDescription: req.body.companyDescription
 
   }
   res.end("basarili")
 
   let collection = req.app.get('DB').collection('company');
 
-  let p = collection.insertOne(req.body);
+  let p = collection.insertOne(company);
 
 
 
@@ -30,7 +30,7 @@ module.exports = function(req,res) {
   p.then(function(result){
     console.log("kayit basarili")
   }).catch(function(err){
-    console.log(err);
+    console.log(err,"DB kayit basarisiz");
     res.sendStatus(500);
   });
 }
