@@ -3,6 +3,7 @@
     "url": "mongodb+srv://Zeus:NWMWiLcBDrd9xJ9h@mycluster-pvtu6.mongodb.net/test",
     "name": "findjob",
     "options": {
+      "useUnifiedTopology": true,
       "useNewUrlParser": true
     }
   }
