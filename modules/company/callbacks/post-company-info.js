@@ -25,12 +25,10 @@ module.exports = function(req,res) {
   let p = collection.insertOne(company);
 
 
-
-
   p.then(function(result){
-    console.log("kayit basarili")
+    res.sendStatus(200).send('sirket-bilgileri-kaydedildi')
   }).catch(function(err){
     console.log(err,"DB kayit basarisiz");
-    res.sendStatus(500);
+    res.sendStatus(500).send('db-error');
   });
 }
