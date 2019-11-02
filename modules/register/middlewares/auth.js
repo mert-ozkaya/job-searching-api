@@ -9,8 +9,10 @@ module.exports = [
 
 function authenticate(req, res, next) {
   //const access_token = req.cookies.access_token || req.get('Authorization') || null;
-  access_token = req.body.auth
+  const authorization = req.get('Authorization');
+  const access_token = authorization.split('Bearer ')[1];
 
+  console.log(access_token)
   if(access_token == null) {
     res.status(401).send('access_token_not_found');
     return;
@@ -34,6 +36,7 @@ function getUser(req, res, next) {
   p.then(result => {
     if(result) {
       req.user = result;
+      console.log(req.user)
       next();
     } else return res.status(400).send('user__not_found');
   }).catch(error => {
