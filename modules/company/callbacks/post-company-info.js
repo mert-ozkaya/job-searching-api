@@ -18,13 +18,10 @@ module.exports = function(req,res) {
     companyDescription: req.body.companyDescription
 
   }
-  res.end("basarili")
-
   let collection = req.app.get('DB').collection('company');
 
   let p = collection.insertOne(company);
-
-
+  
   p.then(function(result){
     res.sendStatus(200).send('sirket-bilgileri-kaydedildi')
   }).catch(function(err){
