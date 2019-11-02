@@ -1,3 +1,6 @@
+const jwt = require('jsonwebtoken');
+const settings = require('../../../settings');
+
  function checkEposta(req,res,next) {
 
      let collection = req.app.get('DB').collection('register');
@@ -19,12 +22,10 @@
      });
 }
 
-function checkPassword(req, res) {
+function checkPassword(req, res,next) {
 
   if(req.body.password === req.data.user.password) {
-    res.json({
-      message: `Hoşgeldin ${req.data.user.name} ${req.data.user.surname}`
-    })
+    next()
   }
   else {
     res.status(401).send('wrong-password')
@@ -32,11 +33,34 @@ function checkPassword(req, res) {
 
 }
 
-/*
-  function createToken(req,res,next) {
+function generateAccessToken(req, res, next) {
+  let payload = {
+    user: {
+      _id: req.data.user._id,
+      email: req.data.user.email,
+      name: req.data.name,
+      surname: req.data.surnmame
+    },
+    token_use: 'access'
+  };
 
-    next()
-  }
-*/
 
-module.exports = [checkEposta,checkPassword]
+  let options = {
+    algorithm: 'RS256',
+    subject: req.data.user._id.toString(),
+    expiresIn: "2 days"
+  };
+
+  req.data.access_token = jwt.sign(payload, settings.jwt.privateKey, options);
+
+  next();
+}
+
+function sendResponse(req, res) {
+  res.json({
+    access_token: req.data.access_token
+  });
+}
+
+
+module.exports = [checkEposta,checkPassword, generateAccessToken, sendResponse]
