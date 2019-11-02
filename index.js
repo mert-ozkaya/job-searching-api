@@ -1,8 +1,8 @@
 const MongoClient = require('mongodb').MongoClient
 const package = require('./package')
-const settings = require('./mongodbSettings');
+const settings = require('./settings');
 
-const PORT = process.env.port || 3000;
+const PORT = process.env.port || settings.port;
 
   console.log('name:', package.name);
   console.log('version:', package.version);
