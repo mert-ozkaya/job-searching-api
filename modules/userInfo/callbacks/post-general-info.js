@@ -1,5 +1,4 @@
 
-
 module.exports = function (req,res) {
 
   let generalInfo = {
@@ -47,15 +46,21 @@ module.exports = function (req,res) {
       generalInfo.summaryInfo = req.body.summaryInfo
 
 
-    let collection = req.app.get('DB').collection('userGeneralInfo')
+      let userInfo = {
+        user_id: req.user._id,
+        generalInfo: generalInfo,
+        schoolInfo: ""
+      }
+      
 
-    let p = collection.insertOne(generalInfo)
+      let collection = req.app.get('DB').collection('userInfo')
 
-    p.then((result) => {
-      res.sendStatus(200).send('genel-bilgiler-kaydedildi')
-    }).catch((error) => {
-      res.sendStatus(500).send('db-error')
-    })
+      let p = collection.insertOne(userInfo)
 
+      p.then((result) => {
+        res.sendStatus(200).send(result)
+      }).catch((error) => {
+        res.sendStatus(500).send('db-error')
+      })
 
 }
