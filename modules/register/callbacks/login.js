@@ -48,13 +48,14 @@ function generateAccessToken(req, res, next) {
   let options = {
     algorithm: 'RS256',
     subject: req.data.user._id.toString(),
-    expiresIn: "2 days"
+    expiresIn: "365 days"
   };
 
   req.data.access_token = jwt.sign(payload, settings.jwt.privateKey, options);
 
   next();
 }
+
 
 function sendResponse(req, res) {
   res.json({
