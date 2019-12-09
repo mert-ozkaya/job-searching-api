@@ -8,9 +8,9 @@ module.exports = [
 ]
 
 function authenticate(req, res, next) {
-  //const access_token = req.cookies.access_token || req.get('Authorization') || null;
-  const authorization = req.get('Authorization');
-  const access_token = authorization.split('Bearer ')[1];
+  const access_token = req.cookies.access_token || req.get('Authorization') || null;
+//  const authorization = req.get('Authorization');
+  //const access_token = authorization.split('Bearer ')[1];
 
   console.log(access_token)
   if(access_token == null) {

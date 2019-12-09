@@ -51,7 +51,7 @@ module.exports = function (req,res) {
         generalInfo: generalInfo,
         schoolInfo: ""
       }
-      
+
 
       let collection = req.app.get('DB').collection('userInfo')
 

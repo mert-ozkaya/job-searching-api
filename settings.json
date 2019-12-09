@@ -11,12 +11,12 @@
   "aws": {
     "s3": {
       "config": {
-        "apiVersion": "",
-        "accessKeyId": "",
-        "secretAccessKey": "",
-        "region": ""
+        "accessKeyId": "AKIAJWTVORCI5YBSFNUQ",
+        "secretAccessKey": "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",
+        "apiVersion": "2006-03-01",
+        "region": "us-east-2"
       },
-      "bucket": ""
+      "bucket": "find-job-bucket"
     }
   }
 }

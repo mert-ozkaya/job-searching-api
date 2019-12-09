@@ -59,7 +59,7 @@ function saveSchoolInfo(req,res) {
   if(req.body.undergraduateTitle)
   {
     schoolInfo.undergraduate.title = req.body.undergraduateTitle
-    if(req.body.undergraduateTitle)
+    if(req.body.undergraduateGrade)
       schoolInfo.undergraduate.graduationGrade = req.body.undergraduateTitle
   }
 
