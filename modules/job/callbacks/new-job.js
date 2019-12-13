@@ -1,12 +1,12 @@
 
 module.exports = function(req,res) {
 
-  if(req.body.job_title === undefined) {
+  if(req.body.title === undefined) {
     return res.status(400).send('missing-parameter:job_title')
   }
 
   let data = {
-    title: req.body.job_title
+    title: req.body.title
   }
 
   let collection = req.app.get('DB').collection('jobs');
