@@ -34,7 +34,7 @@ function saveUser(req, res, next) {
   let user = {
     name: req.body.name,
     surname: req.body.surname,
-    account_type: 2,  //1 admin, 2 normal user, 3 işveren user
+    account_type: parseInt(req.body.account_type),  //1 admin, 2 normal user, 3 işveren user
     email: req.body.email,
     password: req.body.password,
     created_at: moment().format()
