@@ -15,7 +15,7 @@ module.exports = function(req,res){
   p.then((result) => {
     res.send(result)
   }).catch((err) => {
-    res.sendStatus(500).send('db-error');
+    res.status(500).send('db-error');
   })
 
 
