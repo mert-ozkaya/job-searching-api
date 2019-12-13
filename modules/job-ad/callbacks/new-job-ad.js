@@ -1,3 +1,4 @@
+const ObjectID = require('mongodb').ObjectID
 const { uuid } = require('uuidv4');
 module.exports = [
   validation,
@@ -6,14 +7,9 @@ module.exports = [
 ]
 
 function validation(req,res,next) {
-  var company_id = req.params.company_id
-
+  console.log(req.body.title)
   if(req.body.job_id === undefined) {
     return res.status(400).send('not-selected-job')
-  }
-
-  if(company_id === undefined) {
-    return res.status(400).send('undefined:company_id')
   }
 
   if(req.body.country_id === undefined) {
@@ -29,7 +25,7 @@ function validation(req,res,next) {
   }
 
   if(req.body.title === undefined){
-    return res.status(400).send('missing-parameter:job-title')
+    return res.status(400).send('missing-parameter:title')
   }
 
   if(req.body.description === undefined) {
@@ -87,11 +83,11 @@ function photoValidation(req,res,next) {
 function uplaodDB(req,res) {
 
   let data = {
-    job_id: req.body.job_id,
-    company_id: req.params.company_id,
+    job_id: ObjectID(req.body.job_id),
+    user_id: ObjectID(req.user._id),
     address: {
-      country_id : req.body.country_id,
-      city_id: req.body.city_id,
+      country_id : ObjectID(req.body.country_id),
+      city_id: ObjectID(req.body.city_id),
       address_details: req.body.address_details
     },
     title: req.body.title,
@@ -104,9 +100,9 @@ function uplaodDB(req,res) {
   let p = collection.insertOne(data);
 
   p.then(function(result){
-    res.sendStatus(200).send('saved-new-job-ad')
+    res.send('saved-new-job-ad')
   }).catch(function(err){
     console.log(err,"DB kayit basarisiz");
-    res.sendStatus(500).send('db-error');
+    res.status(500).send('db-error');
   });
 }
