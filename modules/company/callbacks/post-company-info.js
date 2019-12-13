@@ -21,11 +21,11 @@ module.exports = function(req,res) {
   let collection = req.app.get('DB').collection('company');
 
   let p = collection.insertOne(company);
-  
+
   p.then(function(result){
-    res.sendStatus(200).send('sirket-bilgileri-kaydedildi')
+    res.send('sirket-bilgileri-kaydedildi')
   }).catch(function(err){
     console.log(err,"DB kayit basarisiz");
-    res.sendStatus(500).send('db-error');
+    res.status(500).send('db-error');
   });
 }
