@@ -18,7 +18,7 @@ module.exports = function(req,res){
   },
   {
     '$lookup': {
-      'from': 'company',
+      'from': 'register',
       'localField': 'company_id',
       'foreignField': '_id',
       'as': 'company'
@@ -42,7 +42,7 @@ module.exports = function(req,res){
         _id: result[i]._id,
         title: result[i].title,
         description: result[i].description,
-        company_title: result[i].company.companyTitle
+        company_title: result[i].company.company_name
       }
       array_result.push(data)
     }
