@@ -1,20 +1,20 @@
 const { uuid } = require('uuidv4');
 module.exports = [
   validation
-];
+]
 
 function validation(req,res,next) {
 /*
   company_id (sonra eklenebilir)
   sourceCodeLanguages [ ]
 */
-
-  var job_ad_id = req.params.job_ad_id
+/*
+  var job_ad_id = req.query.job_ad_id
 
   if(job_ad_id === undefined) {
     return res.status(400).send('undefined:job_ad_id')
   }
-
+*/
   if(req.body.title === undefined){
     return res.status(400).send('missing-parameter:job-project-title')
   }
@@ -31,15 +31,19 @@ function validation(req,res,next) {
     return res.status(400).send('undefined:due_date')
   }
 
-  if(req.body.address_details === undefined) {
-    return res.status(400).send('missing-parameter:address_details')
-  }
-
-  req.data.project_doocument_url = null
+  req.data.project_document_url = null
   req.data.sample_input_file_url = null
   req.data.sample_output_file_url = null
   req.data.sample_input_text = ""
   req.data.sample_output_text = ""
 
   next()
+}
+
+function uploadToS3(req,res,next) {
+
+  
+
+
+
 }
