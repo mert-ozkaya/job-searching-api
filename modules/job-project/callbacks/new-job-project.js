@@ -122,7 +122,7 @@ function uploadSampleOutputToS3(req,res,next) {
     }
 
     req.data.fileName = Date.now().toString(36)+uuidv4() + req.data.extension
-    let key = 'job-project/sample-input/' + req.data.fileName
+    let key = 'job-project/sample-output/' + req.data.fileName
 
     let s3 = new AWS.S3(settings.aws.s3.config);
     let params = {
