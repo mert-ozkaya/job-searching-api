@@ -1,4 +1,6 @@
 const Router = require('express').Router;
+const _auth = require('../register/middlewares/auth')
+
 const multer = require('multer');
 const storage = multer.memoryStorage();
 const send = multer({storage: storage});
@@ -13,6 +15,6 @@ var filesUpload = send.fields([
 router.get('/list',require('./callbacks/job-project-list'))
 router.get('/:job_ad_id',require('./callbacks/get-job-project'))
 
-router.post('/new', filesUpload, require('./callbacks/new-job-project'))
+router.post('/new', _auth, filesUpload, require('./callbacks/new-job-project'))
 
 module.exports = router;
