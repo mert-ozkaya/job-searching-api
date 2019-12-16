@@ -13,7 +13,7 @@ var filesUpload = send.fields([
  ])
 
 router.get('/list',require('./callbacks/job-project-list'))
-router.get('/:job_ad_id',require('./callbacks/get-job-project'))
+router.get('/:_id',require('./callbacks/get-job-project'))
 
 router.post('/new', _auth, filesUpload, require('./callbacks/new-job-project'))
 
