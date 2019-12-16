@@ -13,7 +13,7 @@ app.use(bodyParser.urlencoded({ extended: false }))
 app.use(cookieParser());
 
 app.use(function(req, res, next) {
-  req.data = {};
+  req.data = {now: moment()};
   next();
 });
 
@@ -35,14 +35,31 @@ app.use('/job-project',require('./modules/job-project/router'))
 
 
 app.use('/test', function(req,res) {
+    //console.log(req.body.date)
+    //console.log(req.body.date + req.body.hour)
+    var date = moment(req.body.date + req.body.hour, "YYYY/MM/DD h:mm:ss a").format();
+    var date1 = new Date(date);
+    var date2 = new Date(moment().format());
+    //console.log("date1",date1.getTime())
+    //console.log("date2",date2.getTime())
+    let aaa = date2.getTime() - date1.getTime()
+    var delta = Math.abs(aaa) / 1000;
 
-  exec('c-executable\\a.exe', (error, stdout, stderr) => {
-    if (error) {
-      console.error(`exec error: ${error}`);
-      return;
-    }
-    console.log(`stdout: ${stdout}`);
-    console.error(`stderr: ${stderr}`);
-  });
+    // calculate (and subtract) whole days
+    var days = Math.floor(delta / 86400);
+    delta -= days * 86400;
+
+    // calculate (and subtract) whole hours
+    var hours = Math.floor(delta / 3600) % 24;
+    delta -= hours * 3600;
+
+    // calculate (and subtract) whole minutes
+    var minutes = Math.floor(delta / 60) % 60;
+    delta -= minutes * 60;
+
+    // what's left is seconds
+    var seconds = delta % 60;
+
+    res.send("days")
 })
 module.exports = app;
