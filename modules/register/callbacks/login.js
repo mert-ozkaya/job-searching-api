@@ -59,7 +59,8 @@ function generateAccessToken(req, res, next) {
 
 function sendResponse(req, res) {
   res.json({
-    access_token: req.data.access_token
+    access_token: req.data.access_token,
+    account_type: req.data.user.account_type
   });
 }
 
