@@ -7,7 +7,7 @@
     },
     "author": "Mert Ozkaya <ozkaya-mert@hotmail.com>",
     "dependencies": {
-        "aws-sdk": "^2.580.0",
+        "aws-sdk": "^2.814.0",
         "body-parser": "^1.18.3",
         "child_process": "^1.0.2",
         "cookie-parser": "^1.4.4",
